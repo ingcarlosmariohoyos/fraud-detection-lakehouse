@@ -7,9 +7,9 @@
 
 ## Estado actual
 
-- **Fase en curso:** Fase 0 — Preparación (sin empezar)
+- **Fase en curso:** Fase 1 — EDA (sin empezar). Fase 0 completada.
 - **Último paso completado:** `00_setup_catalog.py` terminado y probado en Databricks (catálogo, 6 esquemas, 3 Volumes)
-- **Próximo paso:** commit/push a `dev`, PR `dev` → `main` y cerrar la Fase 0; luego Fase 1 (EDA). Antes de la Fase 1: ver la sección "Data Transformation" del curso
+- **Próximo paso:** ver la sección "Data Transformation" del curso y empezar `notebooks/04_eda.py` (Fase 1)
 - **Última actualización:** 2026-10-31
 
 ---
@@ -41,7 +41,7 @@
 
 ## Checklist por fase
 
-### Fase 0 — Preparación
+### Fase 0 — Preparación (COMPLETADA 2026-10-31)
 - [x] Repo en GitHub (ramas `main` y `dev`) conectado como Git folder en Databricks (rama `dev`)
 - [x] `notebooks/00_setup_catalog.py` (catálogo `fraud_lakehouse` + esquemas, idempotente, con verificación)
 - [x] Volumes de `landing` creados (`source_full`, `source_by_hour`, `incoming`)
@@ -131,7 +131,7 @@
 
 (Se completa al cerrar cada fase.)
 
-### Fase 0 (en curso)
+### Fase 0 (cerrada)
 - Unity Catalog: jerarquía catálogo → esquema → objeto (tablas, Volumes); nombres de tres niveles.
 - Idempotencia con `IF NOT EXISTS`; widgets para parámetros; notebooks como `.py` (texto plano, mejor para Git).
 - Flujo de Git: escribo en el PC → commit/push a `dev` → Pull en Databricks → PR `dev` → `main` al cerrar un bloque → `git pull origin main` en `dev`.
