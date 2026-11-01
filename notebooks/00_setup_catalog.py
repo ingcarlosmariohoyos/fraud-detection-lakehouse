@@ -10,3 +10,14 @@ dbutils.widgets.text("catalog_name", "fraud_lakehouse", "Nombre del catálogo")
 catalog = dbutils.widgets.get("catalog_name")
 
 print(f"Catálogo: {catalog}")
+
+# COMMAND ----------
+
+# Esquemas del proyecto: una etapa del pipeline por esquema
+schemas = ["landing", "bronze", "silver", "gold", "ml", "ops"]
+
+# Volumes de landing: por donde pasan los archivos CSV
+landing_volumes = ["source_full", "source_by_hour", "incoming"]
+
+print(f"Esquemas: {schemas}")
+print(f"Volumes en landing: {landing_volumes}")
