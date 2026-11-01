@@ -9,7 +9,7 @@
 
 - **Fase en curso:** Fase 0 — Preparación (sin empezar)
 - **Último paso completado:** `00_setup_catalog.py` terminado y probado en Databricks (catálogo, 6 esquemas, 3 Volumes)
-- **Próximo paso:** PR `dev` → `main`; descargar PaySim y subirlo a `landing.source_full`; instalar Databricks CLI y `dbt-databricks`
+- **Próximo paso:** commit/push a `dev`, PR `dev` → `main` y cerrar la Fase 0; luego Fase 1 (EDA). Antes de la Fase 1: ver la sección "Data Transformation" del curso
 - **Última actualización:** 2026-10-31
 
 ---
@@ -45,10 +45,12 @@
 - [x] Repo en GitHub (ramas `main` y `dev`) conectado como Git folder en Databricks (rama `dev`)
 - [x] `notebooks/00_setup_catalog.py` (catálogo `fraud_lakehouse` + esquemas, idempotente, con verificación)
 - [x] Volumes de `landing` creados (`source_full`, `source_by_hour`, `incoming`)
-- [ ] PaySim descargado y subido a `landing.source_full`
+- [x] PaySim descargado y subido a `landing.source_full/paysim.csv` (6.362.620 filas verificadas con `read_files`)
 - [x] `.gitignore` y carpetas base (`notebooks/`, `docs/decisiones/`)
 - [x] `docs/caso_de_negocio.md` escrito en mis palabras
-- [ ] Databricks CLI y `dbt-databricks` instalados; `profiles.yml` fuera del repo (`.gitignore`)
+- [x] Python 3.12 + `.venv` + `dbt-databricks` (dbt-core 1.12.6, adaptador 1.13.0); `profiles.yml` en `~/.dbt/` (fuera del repo); `dbt debug` pasa
+- [x] Databricks CLI 1.22.1 instalado (falta autenticarlo; se hace en la Fase 2/6 cuando se use)
+- [x] `dbt/fraud_dbt/dbt_project.yml` mínimo (sin modelos todavía)
 - **DoD:** `SELECT` sobre el CSV desde el Volume funciona; `dbt debug` pasa; caso de negocio escrito.
 
 ### Fase 1 — EDA
