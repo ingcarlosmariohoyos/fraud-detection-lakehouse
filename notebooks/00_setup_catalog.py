@@ -28,3 +28,19 @@ print(f"Volumes en landing: {landing_volumes}")
 spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog}")
 
 display(spark.sql("SHOW CATALOGS"))
+
+# COMMAND ----------
+
+# Crear los esquemas: un bucle recorre la lista y crea cada uno si no existe
+for schema in schemas:
+    spark.sql(f"CREATE SCHEMA IF NOT EXISTS {catalog}.{schema}")
+
+display(spark.sql(f"SHOW SCHEMAS IN {catalog}"))
+
+# COMMAND ----------
+
+# Crear los Volumes de landing (managed volumes: Unity Catalog administra el almacenamiento)
+for volume in landing_volumes:
+    spark.sql(f"CREATE VOLUME IF NOT EXISTS {catalog}.landing.{volume}")
+
+display(spark.sql(f"SHOW VOLUMES IN {catalog}.landing"))
