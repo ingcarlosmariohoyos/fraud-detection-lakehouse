@@ -1,0 +1,46 @@
+# Credenciales y secretos (NUNCA al repo)
+.env
+*.env
+profiles.yml
+secrets.toml
+**/.streamlit/secrets.toml
+*.pem
+*.key
+.databrickscfg
+
+# Datos (el CSV de PaySim pesa ~470 MB; se sube a un Volume, no a Git)
+*.csv
+*.csv.gz
+*.zip
+# El snapshot de la app (Parquet pequeño) SÍ va al repo
+!app/data/*.parquet
+
+# dbt
+target/
+dbt_packages/
+logs/
+dbt/**/target/
+dbt/**/dbt_packages/
+
+# Databricks CLI / bundles
+.databricks/
+.bundle/
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.pytest_cache/
+.ruff_cache/
+*.egg-info/
+.ipynb_checkpoints/
+
+# Editor / sistema operativo
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Claude Code (configuración local)
+.claude/settings.local.json
