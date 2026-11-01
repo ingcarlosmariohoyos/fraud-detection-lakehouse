@@ -8,8 +8,8 @@
 ## Estado actual
 
 - **Fase en curso:** Fase 0 — Preparación (sin empezar)
-- **Último paso completado:** `.gitignore`, carpetas `notebooks/` y `docs/decisiones/`, borrador de `docs/caso_de_negocio.md`
-- **Próximo paso:** (opcional) ver "Unity Catalog Hands On" de la sección 7; luego `00_setup_catalog.py`
+- **Último paso completado:** `00_setup_catalog.py` terminado y probado en Databricks (catálogo, 6 esquemas, 3 Volumes)
+- **Próximo paso:** PR `dev` → `main`; descargar PaySim y subirlo a `landing.source_full`; instalar Databricks CLI y `dbt-databricks`
 - **Última actualización:** 2026-10-31
 
 ---
@@ -42,9 +42,9 @@
 ## Checklist por fase
 
 ### Fase 0 — Preparación
-- [ ] Repo en GitHub conectado como Git folder en Databricks
-- [ ] `notebooks/00_setup_catalog.py` (catálogo `fraud_lakehouse` + esquemas, idempotente)
-- [ ] Volumes de `landing` creados
+- [x] Repo en GitHub (ramas `main` y `dev`) conectado como Git folder en Databricks (rama `dev`)
+- [x] `notebooks/00_setup_catalog.py` (catálogo `fraud_lakehouse` + esquemas, idempotente, con verificación)
+- [x] Volumes de `landing` creados (`source_full`, `source_by_hour`, `incoming`)
 - [ ] PaySim descargado y subido a `landing.source_full`
 - [x] `.gitignore` y carpetas base (`notebooks/`, `docs/decisiones/`)
 - [x] `docs/caso_de_negocio.md` escrito en mis palabras
@@ -129,6 +129,11 @@
 
 (Se completa al cerrar cada fase.)
 
+### Fase 0 (en curso)
+- Unity Catalog: jerarquía catálogo → esquema → objeto (tablas, Volumes); nombres de tres niveles.
+- Idempotencia con `IF NOT EXISTS`; widgets para parámetros; notebooks como `.py` (texto plano, mejor para Git).
+- Flujo de Git: escribo en el PC → commit/push a `dev` → Pull en Databricks → PR `dev` → `main` al cerrar un bloque → `git pull origin main` en `dev`.
+
 ---
 
 ## Decisiones tomadas
@@ -137,9 +142,16 @@
 |---|---|---|
 | 2026-10-31 | Usar Sonnet 5.5 con esfuerzo medio como base; subir en fases 4 y 5 | — |
 | 2026-10-31 | `PROGRESO.md` como memoria entre sesiones; `CLAUDE.md` para reglas fijas | — |
+| 2026-10-31 | Ramas `main` (estable) y `dev` (trabajo); PR de `dev` a `main` con merge normal, no squash | — |
+| 2026-10-31 | El código se escribe solo en el PC; el Git folder de Databricks solo hace Pull y ejecuta | — |
 
 ---
 
 ## Bitácora de errores
 
 (Error de Databricks → causa → solución. Sirve para preguntas de entrevista.)
+
+- **Conflicto al hacer Pull en el Git folder** ("Conflict(s) from pull", "Error continue merge: tip of your current branch is behind remote").
+  - Causa: la copia de Databricks tenía cambios sin subir y, además, `main` y `dev` divergieron tras fusionar un PR.
+  - Solución: no resolver conflictos en Databricks; borrar y recrear el Git folder (todo está en GitHub). En el PC, `git pull origin main` en `dev` justo después de cada merge.
+  - Pendiente: confirmar por qué Databricks modifica el archivo tras ejecutarlo.
