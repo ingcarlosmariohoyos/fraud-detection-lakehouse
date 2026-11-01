@@ -21,3 +21,10 @@ landing_volumes = ["source_full", "source_by_hour", "incoming"]
 
 print(f"Esquemas: {schemas}")
 print(f"Volumes en landing: {landing_volumes}")
+
+# COMMAND ----------
+
+# Crear el catálogo solo si no existe (así el notebook es idempotente)
+spark.sql(f"CREATE CATALOG IF NOT EXISTS {catalog}")
+
+display(spark.sql("SHOW CATALOGS"))
